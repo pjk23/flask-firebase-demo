@@ -8,7 +8,9 @@ from firebase_admin import credentials, firestore, initialize_app
 
 app = Flask(__name__)
 
-firebase_credentials = credentials.Certificate("/Users/pjay/Downloads/cfg-flask-demo-firebase-adminsdk-8v72u-97e3923a27.json")
+FIREBASE_SERVICE_KEY = json.loads(base64.b64decode(os.environ.get('FIREBASE_SERVICE_KEY')))
+
+firebase_credentials = credentials.Certificate(FIREBASE_SERVICE_KEY)
 default_app = initialize_app(firebase_credentials)
 db = firestore.client()
 todo_ref = db.collection('tasks')
